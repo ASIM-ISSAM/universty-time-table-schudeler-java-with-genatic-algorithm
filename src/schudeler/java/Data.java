@@ -5,7 +5,7 @@
  */
 package schudeler.java;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;  
 import java.util.Arrays;
 import newpackage.Course;
 import newpackage.Department;

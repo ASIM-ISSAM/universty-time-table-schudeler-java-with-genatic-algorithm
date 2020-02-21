@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 public class GenaticAlgorithm {
 
     private Data data;
-
+ 
     public GenaticAlgorithm(Data data) {
         this.data = data;
     }
@@ -78,5 +78,4 @@ public class GenaticAlgorithm {
         });
         return tournamentPopulation;
     }
-
 }

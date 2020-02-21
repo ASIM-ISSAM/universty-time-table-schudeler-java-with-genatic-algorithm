@@ -5,7 +5,7 @@
  */
 package schudeler.java;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Arrays;
 import newpackage.Course;
 import newpackage.Department;
@@ -57,7 +57,7 @@ public class Data {
         Instructor instructor5 = new Instructor("I5", "Dr instractor 5");
         instructors = new ArrayList<Instructor>(Arrays.asList(instructor1,instructor2,instructor3,instructor4,instructor5));
 
-        Course course1 = new Course("comp 101", "cs1", 600, new ArrayList<Instructor>(Arrays.asList(instructor1)));
+        Course course1 = new Course("comp 101", "cs1", 500, new ArrayList<Instructor>(Arrays.asList(instructor1)));
         Course course2 = new Course("comp 102", "cs2", 500, new ArrayList<Instructor>(Arrays.asList(instructor2)));
         Course course3 = new Course("comp 103", "cs3", 500, new ArrayList<Instructor>(Arrays.asList(instructor3)));
         Course course4 = new Course("comp 104", "cs4", 500, new ArrayList<Instructor>(Arrays.asList(instructor4)));

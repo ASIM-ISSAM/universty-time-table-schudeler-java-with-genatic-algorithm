@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  *
  * @author Assim
  */
-public class Population {
+public class Population { 
 
     private ArrayList<Schedule> schedules;
 

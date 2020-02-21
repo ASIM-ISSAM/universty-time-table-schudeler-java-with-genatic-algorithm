@@ -16,9 +16,9 @@ import newpackage.Class;
 public class Schedule {
 
     private ArrayList<Class> classes;
-    private boolean isFitnessChanged = true;
+    private boolean isFitnessChanged = false;
     private double fitness = -1;
-    private int classNumb = 0;
+    private int classNumb = 0; 
     private int numbOfConflicts = 0;
     private Data data;
 
@@ -54,9 +54,9 @@ public class Schedule {
     }
 
     public double getFitness() {
-        if (isFitnessChanged == true) {
+        if (isFitnessChanged == false) {
             fitness = calculateFitness();
-            isFitnessChanged = false;
+            isFitnessChanged = true;
         }
         return fitness;
     }
@@ -84,10 +84,9 @@ public class Schedule {
     @Override
     public String toString() {
         String returnValue = new String();
-        for (int x = 0; x < classes.size() - 1; x++) {
+        for (int x = 0; x < classes.size(); x++) {
             returnValue += classes.get(x) + ",";
         }
-        returnValue += classes.get(classes.size() - 1);
         return returnValue;
     }
 

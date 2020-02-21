@@ -6,6 +6,7 @@
 package schudeler.java;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import newpackage.Class;
 
 /**
@@ -21,7 +22,7 @@ public class Driver {
     public static final double MUTATION_RATE = 0.1;
     public static final double CROSSOVER_RATE = 0.9;
     public static final int TOURNAMENT_SELECTION_SIZE = 3;
-    public static final int NUMB_OF_ELITE_SCHEDULES = 1;
+    public static final int NUMB_OF_ELITE_SCHEDULES = 2;
     private int scheduleNumb = 1;
     private int classNumb = 1;
     private Data data;
@@ -31,12 +32,12 @@ public class Driver {
 
         Driver driver = new Driver();
         driver.data = new Data();
-        int generationNumber = 0;
+        int generationNumber = 1;
         driver.printAvailableData();
 
         GenaticAlgorithm geneticAlgorithm = new GenaticAlgorithm((driver.data));
         Population population = new Population(Driver.POPULATION_SIZE, driver.data).sortByFitnes();
-        do {
+        do { // if the no of student is too large, this code will not stop ( you need to divide the students to many  rooms)
             driver.scheduleNumb = 1;
             driver.classNumb = 1;
             System.out.println("> Generation : " + generationNumber++);
@@ -44,7 +45,10 @@ public class Driver {
             System.out.println("----------------------------------------------------------------------------------------------");
             population = new Population(Driver.POPULATION_SIZE, driver.data).sortByFitnes();
             population.getSchedules().forEach(schedule -> System.out.println("           " + driver.scheduleNumb++ + "       | " + schedule + " | " + String.format("%.5f", schedule.getFitness()) + " | " + schedule.getNumbOfConflicts()));
-            driver.printScheduleAsTable(population.getSchedules().get(0), generationNumber);
+            if (population.getSchedules().get(0).getFitness() == 1.0) 
+            {
+                driver.printScheduleAsTable(population.getSchedules().get(0), generationNumber);
+            }
         } while (population.getSchedules().get(0).getFitness() != 1.0);
     }
 
@@ -70,10 +74,7 @@ public class Driver {
             System.out.print(data.getMeetingTimes().get(meetingTimeIndex).getTime() + " ( " + data.getMeetingTimes().get(meetingTimeIndex).getId() + " ) | ");
             classNumb++;
         });
-
-        if (schedule.getFitness() == 1) {
-            System.out.println("> solution found in " + (generation + 1) + " generations");
-        }
+        System.out.println("> solution found in " + (generation + 1) + " generations");
         System.out.print("----------------------------------------------------------------------------------");
         System.out.println("-------------------------------------------------------------------------------------");
 

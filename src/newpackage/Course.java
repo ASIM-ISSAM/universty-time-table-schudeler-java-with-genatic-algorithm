@@ -15,17 +15,22 @@ import java.util.ArrayList;
 public class Course {
     private String number = null ;
     private String name = null ;
-    //private int criditHour = 0;
+    private int hour = 0;
     private int maxNumberOfStudent;
     private ArrayList<Instructor> instructors;
 
-    public Course(String number, String name, int maxNumberOfStudent, ArrayList<Instructor> instructors) {
+    public Course(String number, String name, int hour, int maxNumberOfStudent, ArrayList<Instructor> instructors) {
         this.number = number;
         this.name = name;
+        this.hour = hour;
         this.maxNumberOfStudent = maxNumberOfStudent;
         this.instructors = instructors;
     }
 
+    public int getHour() {
+        return hour;
+    }
+    
     public String getNumber() {
         return number;
     }

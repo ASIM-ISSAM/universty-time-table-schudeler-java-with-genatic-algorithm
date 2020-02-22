@@ -12,26 +12,29 @@ package newpackage;
 public class MeetingTime {
  
     private String id;
-    private String time;
+    private int start;
+    private int day;
 
-    public MeetingTime(String id, String time) {
-        this.id = id;
-        this.time = time;
+    public MeetingTime(int day, int start) {
+        this.id = "(d:"+day+" , h:"+start+") ";
+        this.start = start ;
+        this.day = day;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getTime() {
-        return time;
+    public int getStart() {
+        return start;
+    }
+
+    public int getDay() {
+        return day;
     }
 
     @Override
     public String toString() {
-        return "MeetingTime{" + "id=" + id + ", time=" + time + '}';
+        return "MeetingTime{" + "id=" + id + ", start=" + start + ", day=" + day + '}';
     }
-    
-    
-    
 }

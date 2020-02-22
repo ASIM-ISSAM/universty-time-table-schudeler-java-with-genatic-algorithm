@@ -5,6 +5,8 @@
  */
 package newpackage;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Assim
@@ -15,8 +17,8 @@ public class Class {
     private Department dept;
     private Course course;
     private Instructor instructor;
-    private MeetingTime meetingTime;
     private Room room;
+    private ArrayList<MeetingTime> meetingTime;
 
     public Class(int id, Department dept, Course course) {
         this.id = id;
@@ -26,10 +28,6 @@ public class Class {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
-    }
-
-    public void setMeetingTime(MeetingTime meetingTime) {
-        this.meetingTime = meetingTime;
     }
 
     public void setRoom(Room room) {
@@ -52,19 +50,20 @@ public class Class {
         return instructor;
     }
 
-    public MeetingTime getMeetingTime() {
-        return meetingTime;
-    }
-
     public Room getRoom() {
         return room;
+    }
+    
+    public ArrayList<MeetingTime> getMeetingTime() {
+        return meetingTime;
+    }
+    
+    public void setMeetingTime(ArrayList<MeetingTime> meetingTime) {
+        this.meetingTime = meetingTime;
     }
 
     @Override
     public String toString() {
         return "Class{" + "id=" + id + ", dept=" + dept + ", course=" + course + ", instructor=" + instructor + ", meetingTime=" + meetingTime + ", room=" + room + '}';
-    }
-    
-    
-    
+    }  
 }

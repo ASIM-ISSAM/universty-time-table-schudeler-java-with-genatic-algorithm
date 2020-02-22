@@ -39,7 +39,7 @@ public class Driver {
         Population population = new Population(Driver.POPULATION_SIZE, driver.data).sortByFitnes();
         do { // if the no of student is too large, this code will not stop ( you need to divide the students to many  rooms)
             driver.scheduleNumb = 1;
-            driver.classNumb = 1;
+            driver.classNumb = 1;//-----------------------------------------
             System.out.println("> Generation : " + generationNumber++);
             System.out.println("schedule :         | classes [dept,class,room,instractor,meeting-time]   | fitness | conflicts");
             System.out.println("----------------------------------------------------------------------------------------------");
@@ -59,19 +59,21 @@ public class Driver {
         System.out.print("              ");
         System.out.print("----------------------------------");
         System.out.println("----------------------------------------------");
-        classes.forEach(x -> {
-            int majorIndex = data.getDepts().indexOf(x.getDept());
-            int coursesIndex = data.getCourses().indexOf(x.getCourse());
-            int roomIndex = data.getRooms().indexOf(x.getRoom());
-            int instructorIndex = data.getInstructors().indexOf(x.getInstructor());
-            int meetingTimeIndex = data.getMeetingTimes().indexOf(x.getMeetingTime());
+        classes.forEach(clas -> {
+            int majorIndex = data.getDepts().indexOf(clas.getDept());
+            int coursesIndex = data.getCourses().indexOf(clas.getCourse());
+            int roomIndex = data.getRooms().indexOf(clas.getRoom());
+            int instructorIndex = data.getInstructors().indexOf(clas.getInstructor());
             System.out.print("                         ");
             System.out.print(String.format("%1$02d", classNumb) + " | ");
             System.out.print(String.format("%1$4s", data.getDepts().get(majorIndex).getName()) + " | ");
-            System.out.print(String.format("%1$21s", data.getCourses().get(coursesIndex).getName()) + " ( " + data.getCourses().get(coursesIndex).getNumber() + " , " + x.getCourse().getMaxNumberOfStudent() + ")                 |");
-            System.out.print(String.format("%1$10s", data.getRooms().get(roomIndex).getNumber()) + " ( " + x.getRoom().getSeatingCapacity() + " ) | ");
-            System.out.print(String.format("%1$15s", data.getInstructors().get(instructorIndex).getName()) + " ( " + x.getInstructor().getId() + " ) | ");
-            System.out.print(data.getMeetingTimes().get(meetingTimeIndex).getTime() + " ( " + data.getMeetingTimes().get(meetingTimeIndex).getId() + " ) | ");
+            System.out.print(String.format("%1$21s", data.getCourses().get(coursesIndex).getName()) + " ( " + data.getCourses().get(coursesIndex).getNumber() + " , " + clas.getCourse().getMaxNumberOfStudent() + ")                 |");
+            System.out.print(String.format("%1$10s", data.getRooms().get(roomIndex).getNumber()) + " ( " + clas.getRoom().getSeatingCapacity() + " ) | ");
+            System.out.print(String.format("%1$15s", data.getInstructors().get(instructorIndex).getName()) + " ( " + clas.getInstructor().getId() + " ) | ");
+            for(int i=0; i<clas.getMeetingTime().size(); i++)
+            {
+                System.out.print(clas.getMeetingTime().get(i).getId());
+            }
             classNumb++;
         });
         System.out.println("> solution found in " + (generation + 1) + " generations");
@@ -90,7 +92,7 @@ public class Driver {
         System.out.println("\nAvailable instructors ==>");
         data.getInstructors().forEach(x -> System.out.println("id #: " + x.getId() + " ,name: " + x.getName()));
         System.out.println("\nAvailable meeting time ==>");
-        data.getMeetingTimes().forEach(x -> System.out.println("id #: " + x.getId() + " ,time: " + x.getTime()));
+        data.getMeetingTimes().forEach(x -> System.out.println("id #: " + x.getId() + " ,time: " + x.getId()));
         System.out.print("----------------------------------------------------------------------------");
         System.out.println("--------------------------------------------------------------------------");
     }

@@ -19,37 +19,44 @@ import newpackage.Room;
  */
 public class Data {
 
-    private ArrayList<Room> rooms;
+    ArrayList<Room> rooms;
     private ArrayList<Instructor> instructors;
     private ArrayList<Course> courses;
     private ArrayList<Department> depts;
     private ArrayList<MeetingTime> meetingTimes;
     private int numberOfClasses = 0;
+    private int maxDays=6;
+    private int maxHours=10;
 
     public Data() {
         initialise();
     }
 
+    public void generateMeetingTimes()
+    {
+        ArrayList<MeetingTime> arList = new ArrayList();
+        for(int i=0; i<maxDays ;i++)
+        {
+            for(int j=0; j<maxHours; j++)
+            {
+                MeetingTime meetingTime = new MeetingTime(i,j);
+                arList.add(meetingTime);
+            }
+        }
+        meetingTimes = arList;
+    }
+    
     private Data initialise() {
-        Room room1 = new Room("room1", 500);
-        Room room2 = new Room("room2", 500);
-        Room room3 = new Room("room2", 500);
-        Room room4 = new Room("room3", 500);
-        Room room5 = new Room("room4", 500);
+    
+        generateMeetingTimes();
+        
+        Room room1 = new Room("room1", 500, meetingTimes);
+        Room room2 = new Room("room2", 500, meetingTimes);
+        Room room3 = new Room("room3", 500, meetingTimes);
+        Room room4 = new Room("room4", 500, meetingTimes);
+        Room room5 = new Room("room5", 500, meetingTimes);
         rooms = new ArrayList<Room>(Arrays.asList(room1,room2,room3,room4,room5));
-
-        MeetingTime meetingTime1 = new MeetingTime("MT1", "08:00 - 09:00");
-        MeetingTime meetingTime2 = new MeetingTime("MT2", "09:00 - 10:00");
-        MeetingTime meetingTime3 = new MeetingTime("MT3", "10:00 - 11:00");
-        MeetingTime meetingTime4 = new MeetingTime("MT4", "11:00 - 12:00");
-        MeetingTime meetingTime5 = new MeetingTime("MT5", "12:00 - 01:00");
-        MeetingTime meetingTime6 = new MeetingTime("MT6", "01:00 - 02:00");
-        MeetingTime meetingTime7 = new MeetingTime("MT7", "02:00 - 03:00");
-        MeetingTime meetingTime8 = new MeetingTime("MT8", "03:00 - 04:00");
-        MeetingTime meetingTime9 = new MeetingTime("MT9", "04:00 - 05:00");
-        MeetingTime meetingTime10 = new MeetingTime("MT10", "05:00 - 06:00");
-        meetingTimes = new ArrayList<MeetingTime>(Arrays.asList(meetingTime1,meetingTime2,meetingTime3,meetingTime4,meetingTime5));
-
+        
         Instructor instructor1 = new Instructor("I1", "Dr instractor 1");
         Instructor instructor2 = new Instructor("I2", "Dr instractor 2");
         Instructor instructor3 = new Instructor("I3", "Dr instractor 3");
@@ -57,11 +64,11 @@ public class Data {
         Instructor instructor5 = new Instructor("I5", "Dr instractor 5");
         instructors = new ArrayList<Instructor>(Arrays.asList(instructor1,instructor2,instructor3,instructor4,instructor5));
 
-        Course course1 = new Course("comp 101", "cs1", 500, new ArrayList<Instructor>(Arrays.asList(instructor1)));
-        Course course2 = new Course("comp 102", "cs2", 500, new ArrayList<Instructor>(Arrays.asList(instructor2)));
-        Course course3 = new Course("comp 103", "cs3", 500, new ArrayList<Instructor>(Arrays.asList(instructor3)));
-        Course course4 = new Course("comp 104", "cs4", 500, new ArrayList<Instructor>(Arrays.asList(instructor4)));
-        Course course5 = new Course("comp 105", "cs5", 500, new ArrayList<Instructor>(Arrays.asList(instructor5)));
+        Course course1 = new Course("comp 101", "cs1", 1, 500, new ArrayList<Instructor>(Arrays.asList(instructor1)));
+        Course course2 = new Course("comp 102", "cs2", 2, 500, new ArrayList<Instructor>(Arrays.asList(instructor2)));
+        Course course3 = new Course("comp 103", "cs3", 3, 500, new ArrayList<Instructor>(Arrays.asList(instructor3)));
+        Course course4 = new Course("comp 104", "cs4", 1, 500, new ArrayList<Instructor>(Arrays.asList(instructor4)));
+        Course course5 = new Course("comp 105", "cs5", 2, 500, new ArrayList<Instructor>(Arrays.asList(instructor5)));
         courses = new ArrayList<Course>(Arrays.asList(course1,course2,course3,course4,course5));
 
         Department dept1 = new Department("computer science1", new ArrayList<Course>(Arrays.asList(course1)));

@@ -8,6 +8,8 @@ package schudeler.java;
 import java.util.ArrayList;
 import newpackage.Department;
 import newpackage.Class;
+import newpackage.MeetingTime;
+import newpackage.Room;
 
 /**
  *
@@ -21,7 +23,7 @@ public class Schedule {
     private int classNumb = 0; 
     private int numbOfConflicts = 0;
     private Data data;
-
+    
     public Data getData() {
         return data;
     }
@@ -35,8 +37,20 @@ public class Schedule {
         new ArrayList<Department>(data.getDepts()).forEach(dept -> {
             dept.getCourses().forEach(course -> {
                 Class newClass = new Class(classNumb++, dept, course);
-                newClass.setMeetingTime(data.getMeetingTimes().get((int) (data.getMeetingTimes().size() * Math.random())));
-                newClass.setRoom(data.getRooms().get((int) (data.getRooms().size() * Math.random())));
+                
+                ArrayList<ArrayList<MeetingTime>> roomMeetingTime ;
+                Room room;
+                do
+                {
+                    room = data.getRooms().get((int) (data.getRooms().size() * Math.random()));
+                    roomMeetingTime = room.getMeetingTimes(course.getHour());
+                }while(roomMeetingTime.size()==0);
+                
+                ArrayList<MeetingTime> mT = roomMeetingTime.get((int) ( roomMeetingTime.size() * Math.random()));
+                newClass.setMeetingTime(mT);
+                newClass.setRoom(room);
+                room.removeMeetingTime(mT);// it remove from room & data (error)
+                    
                 newClass.setInstructor(data.getInstructors().get((int) (data.getInstructors().size() * Math.random())));
                 classes.add(newClass);
             });
@@ -49,7 +63,7 @@ public class Schedule {
     }
 
     public ArrayList<Class> getClasses() {
-        isFitnessChanged = true;
+        isFitnessChanged = false;
         return classes;
     }
 
@@ -68,7 +82,16 @@ public class Schedule {
                 numbOfConflicts++;
             }
             classes.stream().filter(y -> classes.indexOf(y) >= classes.indexOf(x)).forEach(y -> {
-                if (x.getMeetingTime() == y.getMeetingTime() && x.getId() != y.getId()) {
+                boolean conf = false;
+                for(int i=0; i<x.getMeetingTime().size(); i++)
+                {
+                    if(y.getMeetingTime().contains(x.getMeetingTime().get(i)))
+                    {
+                        conf = true;
+                        break;
+                    }
+                }
+                if (conf) {
                     if (x.getRoom() == y.getRoom()) {
                         numbOfConflicts++;
                     }
